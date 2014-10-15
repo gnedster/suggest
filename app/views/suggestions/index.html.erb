@@ -5,16 +5,24 @@
 <% if @suggestions.length > 0 %>
   <div id="suggestions">
     <% @suggestions.each do |suggestion| %>
-      <div class="row">
-        <div class="col-md-12">
+      <div class="row suggestion">
+        <div class="col-md-1">
+          <span class="score">
+            <%= suggestion.score %>
+          </span>
+          <p class="x-small">
+            Endorsements
+          </p>
+        </div>
+        <div class="col-md-11">
           <h4>
             <%= suggestion.name %>
             <button type="button" class="btn btn-default btn-xs endorse" data-id=<%= suggestion.id %>>
-              <span class="glyphicon glyphicon-star"></span> Endorse (<%= suggestion.score %>)
+              <span class="glyphicon glyphicon-star"></span> Endorse
             </button>
           </h4>
           <p><%= suggestion.description %></p>
-          <p class="small pull-right"><i><%= suggestion.updated_at.to_formatted_s(:long) %></i></p>
+          <p class="x-small"><i><%= suggestion.updated_at.to_formatted_s(:long) %></i></p>
         </div>
       </div>
     <% end %>
@@ -42,9 +50,11 @@
         success: function(data) {
           var $endorseBtn = $(evt.currentTarget);
 
+          $endorseBtn.closest('.suggestion').find('.score').html(data.score);
+
           $.cookie($(evt.currentTarget).data('id'), true);
 
-          $endorseBtn.html($endorseBtn.html().replace(/\d+/, data.score).replace("Endorse", "Endorsed!"));
+          $endorseBtn.html($endorseBtn.html().replace("Endorse", "Endorsed!"));
           $endorseBtn.addClass('disabled');
 
         }

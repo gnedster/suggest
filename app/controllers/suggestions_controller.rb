@@ -4,7 +4,7 @@ class SuggestionsController < ApplicationController
   # GET /suggestions
   # GET /suggestions.json
   def index
-    @suggestions = Suggestion.all.order(score: :desc, created_at: :desc)
+    @suggestions = Suggestion.all.order(updated_at: :desc)
   end
 
   # GET /suggestions/1
@@ -28,6 +28,7 @@ class SuggestionsController < ApplicationController
 
     respond_to do |format|
       if @suggestion.save
+        cookies[@suggestion.id] = "true"
         format.html { redirect_to @suggestion, notice: 'Suggestion was successfully created.' }
         format.json { render :show, status: :created, location: @suggestion }
       else
