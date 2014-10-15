@@ -1,0 +1,12 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+#suggestions {
+  .row {
+    border-bottom: 1px dotted;
+  }
+
+  .row:first-child {
+    border-top: 1px dotted;
+  }
+}

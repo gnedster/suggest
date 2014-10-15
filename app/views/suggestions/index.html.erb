@@ -1,0 +1,55 @@
+<h1>Suggestion Box</h1>
+
+<%= link_to 'Add a Suggestion', new_suggestion_path %>
+
+<% if @suggestions.length > 0 %>
+  <div id="suggestions">
+    <% @suggestions.each do |suggestion| %>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>
+            <%= suggestion.name %>
+            <button type="button" class="btn btn-default btn-xs endorse" data-id=<%= suggestion.id %>>
+              <span class="glyphicon glyphicon-star"></span> Endorse (<%= suggestion.score %>)
+            </button>
+          </h4>
+          <p><%= suggestion.description %></p>
+          <p class="small pull-right"><i><%= suggestion.updated_at.to_formatted_s(:long) %></i></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div>
+    Looks like there are no suggestions.
+  </div>
+<% end %>
+
+<%= javascript_tag do %>
+  $(document).ready(function() {
+    $("button.endorse").each(function(idx, el) {
+      if ($.cookie(String($(el).data('id'))) === "true") {
+        $(el).addClass('disabled');
+        $(el).html($(el).html().replace("Endorse", "Endorsed!"));
+      }
+    });
+
+    $("button.endorse").click(function(evt) {
+      $.ajax({
+        url: "suggestions/" + $(evt.currentTarget).data('id') + "/endorse",
+        type: "POST",
+        dataType: "json",
+        success: function(data) {
+          var $endorseBtn = $(evt.currentTarget);
+
+          $.cookie($(evt.currentTarget).data('id'), true);
+
+          $endorseBtn.html($endorseBtn.html().replace(/\d+/, data.score).replace("Endorse", "Endorsed!"));
+          $endorseBtn.addClass('disabled');
+
+        }
+      });
+    });
+  });
+<% end %>
+
