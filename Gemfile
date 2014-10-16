@@ -39,5 +39,6 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'jquery-cookie-rails'
+gem 'rack-attack'
 gem 'rails-backbone', git: 'git@github.com:codebrew/backbone-rails.git'
 gem 'bootstrap-sass'
