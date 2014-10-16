@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'suggestions#index'
 
-  resources :suggestions, :except => [:destroy, :edit, :show, :update] do
+  resources :suggestions, :except => [:destroy, :edit, :update] do
     member do
       post 'endorse', :defaults => { :format => 'json' }
     end
