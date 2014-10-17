@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery.cookie
 //= require jquery_ujs
+//= require autocomplete-rails
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .

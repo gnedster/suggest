@@ -1,6 +1,7 @@
 class SuggestionsController < ApplicationController
   before_action :set_suggestion, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column
+  autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
 
   # GET /suggestions
   # GET /suggestions.json

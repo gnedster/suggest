@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     member do
       post 'endorse', :defaults => { :format => 'json' }
     end
+    collection do
+      get :autocomplete_tag_name
+    end
   end
 
   # Example of regular route:

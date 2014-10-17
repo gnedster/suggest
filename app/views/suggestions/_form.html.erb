@@ -17,7 +17,7 @@
   </div>
   <div class="form-group">
     <%= f.label :tag_list, "Tags (seperated by commas)" %><br>
-    <%= f.text_field :tag_list, :class=>"form-control" %>
+    <%= f.autocomplete_field :tag_list, autocomplete_tag_name_suggestions_path, :"data-delimiter" => ', ', :class=> "form-control" %>
   </div>
   <div class="form-group">
     <%= f.label :description %><br>
