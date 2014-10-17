@@ -1,6 +1,7 @@
 <%= link_to 'Add a Suggestion', new_suggestion_path %>
 
 <div id="suggestions">
+  <span class="small"> Sort By: <%= sortable "updated_at", "Updated" %> | <%= sortable "created_at", "Created" %> | <%= sortable "score", "Endorsements" %> </span>
   <% @suggestions.each do |suggestion| %>
     <div class="row suggestion">
       <div class="col-md-1">

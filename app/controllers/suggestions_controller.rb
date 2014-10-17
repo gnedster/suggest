@@ -1,10 +1,11 @@
 class SuggestionsController < ApplicationController
   before_action :set_suggestion, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column
 
   # GET /suggestions
   # GET /suggestions.json
   def index
-    @suggestions = Suggestion.all.order(updated_at: :desc)
+    @suggestions = Suggestion.order(sort_column + " desc")
   end
 
   # GET /suggestions/1
@@ -86,5 +87,9 @@ class SuggestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def suggestion_params
       params.require(:suggestion).permit(:suggestion_id, :name, :description)
+    end
+
+    def sort_column
+      Suggestion.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
     end
 end
