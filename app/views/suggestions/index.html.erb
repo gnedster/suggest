@@ -1,7 +1,7 @@
 <%= link_to 'Add a Suggestion', new_suggestion_path %>
 
 <div id="suggestions">
-  <span class="small"> Sort By: <%= sortable "updated_at", "Updated" %> | <%= sortable "created_at", "Created" %> | <%= sortable "score", "Endorsements" %> </span>
+  <span class="small"> Sort By: <%= sortable "updated_at", "Last Endorsed" %> | <%= sortable "created_at", "First Endorsed" %> | <%= sortable "score", "Endorsements" %> </span>
   <% if params[:tag] %>
     <span class="pull-right small"><%= link_to "Click to remove tag filter", {:sort => params[:sort]} %></span>
   <% end %>
@@ -26,7 +26,7 @@
         <% suggestion.tags.each do |tag| %>
           <span class="tag label pull-right"> <%= link_to tag, {:sort => params[:sort], :tag => tag.to_s} %></span>
         <% end %>
-        <span class="x-small"><i>Updated on <%= suggestion.updated_at.to_formatted_s(:long) %></i></p>
+        <span class="x-small"><i>Last endorsed on <%= suggestion.updated_at.to_formatted_s(:long) %></i></p>
       </div>
     </div>
   <% end %>
