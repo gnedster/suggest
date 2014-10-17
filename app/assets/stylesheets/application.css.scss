@@ -19,3 +19,12 @@ x-small,
 .x-small {
   font-size: 75%;
 }
+
+.tag {
+  margin-left: 3px;
+  background-color: grey;
+
+  a {
+    color: white;
+  }
+}

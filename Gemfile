@@ -48,3 +48,4 @@ gem 'spring',        group: :development
 gem 'jquery-cookie-rails'
 gem 'rack-attack'
 gem 'bootstrap-sass'
+gem 'acts-as-taggable-on'

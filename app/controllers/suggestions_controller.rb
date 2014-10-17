@@ -6,6 +6,12 @@ class SuggestionsController < ApplicationController
   # GET /suggestions.json
   def index
     @suggestions = Suggestion.order(sort_column + " desc")
+
+    if params[:tag]
+      @suggestions = @suggestions.tagged_with(params[:tag])
+    end
+
+    @suggestions
   end
 
   # GET /suggestions/1
@@ -86,7 +92,7 @@ class SuggestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def suggestion_params
-      params.require(:suggestion).permit(:suggestion_id, :name, :description)
+      params.require(:suggestion).permit(:suggestion_id, :name, :description, :tag_list)
     end
 
     def sort_column

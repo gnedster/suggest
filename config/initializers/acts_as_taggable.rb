@@ -1,0 +1,1 @@
+ActsAsTaggable.force_lowercase = true

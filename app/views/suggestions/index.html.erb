@@ -2,6 +2,9 @@
 
 <div id="suggestions">
   <span class="small"> Sort By: <%= sortable "updated_at", "Updated" %> | <%= sortable "created_at", "Created" %> | <%= sortable "score", "Endorsements" %> </span>
+  <% if params[:tag] %>
+    <span class="pull-right small"><%= link_to "Click to remove tag filter", {:sort => params[:sort]} %></span>
+  <% end %>
   <% @suggestions.each do |suggestion| %>
     <div class="row suggestion">
       <div class="col-md-1">
@@ -20,7 +23,10 @@
           </button>
         </h4>
         <p><%= suggestion.description %></p>
-        <p class="x-small"><i><%= suggestion.updated_at.to_formatted_s(:long) %></i></p>
+        <% suggestion.tags.each do |tag| %>
+          <span class="tag label pull-right"> <%= link_to tag, {:sort => params[:sort], :tag => tag.to_s} %></span>
+        <% end %>
+        <span class="x-small"><i><%= suggestion.updated_at.to_formatted_s(:long) %></i></p>
       </div>
     </div>
   <% end %>
