@@ -8,6 +8,8 @@ An anonymous suggestion box. Used internally @ C3 Energy. Features:
 
 * Rate limiting
 
+* Timed destroy window
+
 Proposed features:
 
 * Commenting
@@ -15,6 +17,3 @@ Proposed features:
 * Mail notifications
 
 See example here: http://suggestible.co
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
