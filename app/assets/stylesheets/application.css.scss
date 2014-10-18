@@ -13,6 +13,13 @@
   .score {
     font-size: 250%
   }
+
+  .suggestion {
+    .edit-tags {
+      margin-left: 3px;
+      margin-top: 12px;
+    }
+  }
 }
 
 x-small,
@@ -28,3 +35,4 @@ x-small,
     color: white;
   }
 }
+

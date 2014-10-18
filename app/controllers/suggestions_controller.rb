@@ -32,7 +32,7 @@ class SuggestionsController < ApplicationController
   # POST /suggestions
   # POST /suggestions.json
   def create
-    @suggestion = Suggestion.new(suggestion_params)
+    @suggestion = Suggestion.new(suggestion_params_new)
 
     respond_to do |format|
       if @suggestion.save
@@ -50,7 +50,7 @@ class SuggestionsController < ApplicationController
   # PATCH/PUT /suggestions/1.json
   def update
     respond_to do |format|
-      if @suggestion.update(suggestion_params)
+      if @suggestion.update(suggestion_params_update)
         format.html { redirect_to @suggestion, notice: 'Suggestion was successfully updated.' }
         format.json { render :show, status: :ok, location: @suggestion }
       else
@@ -92,8 +92,12 @@ class SuggestionsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def suggestion_params
+    def suggestion_params_new
       params.require(:suggestion).permit(:suggestion_id, :name, :description, :tag_list)
+    end
+
+    def suggestion_params_update
+      params.require(:suggestion).permit(:tag_list)
     end
 
     def sort_column

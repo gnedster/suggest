@@ -17,12 +17,14 @@
         </p>
       </div>
       <div class="col-md-11">
+        <%= link_to "", edit_suggestion_path(suggestion[:id]), :class => "edit-tags pull-right glyphicon glyphicon-pencil hidden" %>
         <h4>
           <%= suggestion.name %>
           <button type="button" class="btn btn-default btn-xs endorse" data-id=<%= suggestion.id %>>
             <span class="glyphicon glyphicon-star"></span> Endorse
           </button>
         </h4>
+
         <p><%= suggestion.description %></p>
         <% suggestion.tags.each do |tag| %>
           <span class="tag label pull-right"> <%= link_to tag, {:sort => params[:sort], :tag => tag.to_s} %></span>
@@ -39,6 +41,12 @@
         $(el).addClass('disabled');
         $(el).html($(el).html().replace("Endorse", "Endorsed!"));
       }
+    });
+
+    $("div.suggestion").mouseover(function(e) {
+      $(e.currentTarget).find(".edit-tags").removeClass("hidden");
+    }).mouseout(function(e) {
+      $(e.currentTarget).find(".edit-tags").addClass("hidden");
     });
 
     $("button.endorse").click(function(evt) {
