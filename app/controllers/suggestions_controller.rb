@@ -37,7 +37,8 @@ class SuggestionsController < ApplicationController
     respond_to do |format|
       if @suggestion.save
         cookies[@suggestion.id] = "true"
-        format.html { redirect_to @suggestion, notice: 'Suggestion was successfully created.' }
+        format.html { redirect_to @suggestion, notice: 'Suggestion was successfully created.'\
+          ' You will have a limited time to delete the suggestion.' }
         format.json { render :show, status: :created, location: @suggestion }
       else
         format.html { render :new }
@@ -77,13 +78,20 @@ class SuggestionsController < ApplicationController
 
   # # DELETE /suggestions/1
   # # DELETE /suggestions/1.json
-  # def destroy
-  #   @suggestion.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to suggestions_url, notice: 'Suggestion was successfully destroyed.' }
-  #     format.json { head :no_content }
-  #   end
-  # end
+  def destroy
+    if @suggestion.is_ephemeral?
+      @suggestion.destroy
+      respond_to do |format|
+        format.html { redirect_to suggestions_url, notice: 'Suggestion was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @suggestion, notice: 'Suggestion could not be deleted. Lifetime of suggestion has been over 60 seconds.' }
+        format.json { render :show, status: :created, location: @suggestion }
+      end
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
